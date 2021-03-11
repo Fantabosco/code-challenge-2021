@@ -37,7 +37,7 @@ public class SolverPelle implements ISolver {
 		for(int i = 0; i < antennas.size(); i++) {
 			Building b = buildings.get(i);
 			Antenna a = antennas.get(i);
-			output.getAntennaPositions().add(new AntennaPosition(a.getId(), b.getX(), b.getY()));
+			output.getAntennaPositions().add(new AntennaPosition(a, b.getX(), b.getY()));
 		}
 		
 		

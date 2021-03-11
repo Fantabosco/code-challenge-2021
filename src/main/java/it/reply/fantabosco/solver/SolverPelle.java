@@ -33,11 +33,11 @@ public class SolverPelle implements ISolver {
 				return b_score - b_score;
 			}
 		});
-		
-		for(Antenna a : solverInput.getAntennas()) {
-			for(Building b : buildings) {
-				output.getAntennaPositions().add(new AntennaPosition(a.getId(), b.getX(), b.getY()));
-			}
+		List<Antenna> antennas = solverInput.getAntennas();
+		for(int i = 0; i < antennas.size(); i++) {
+			Building b = buildings.get(i);
+			Antenna a = antennas.get(i);
+			output.getAntennaPositions().add(new AntennaPosition(a.getId(), b.getX(), b.getY()));
 		}
 		
 		

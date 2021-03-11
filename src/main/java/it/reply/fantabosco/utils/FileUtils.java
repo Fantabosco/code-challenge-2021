@@ -42,14 +42,6 @@ public class FileUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
-		} finally {
-			try {
-				if (br != null) {
-					br.close();
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
 		}
 		return output;
 	}
@@ -63,14 +55,6 @@ public class FileUtils {
 			log.info("Soluzion wrote to: {}", outputFile);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if(bufferedWriter != null) {
-					bufferedWriter.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 	}
 }

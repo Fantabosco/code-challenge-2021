@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AntennaPosition {
 	
-	int id;
+	Antenna antenna;
 	int x;
 	int y;
 

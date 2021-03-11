@@ -23,11 +23,11 @@ public class Main {
 	public static void main(String[] args) {
 		challenge("data_scenarios_a_example.in");
 		challenge("data_scenarios_b_mumbai.in");
-//		challenge("data_scenarios_c_metropolis.in");
-//		challenge("data_scenarios_d_polynesia.in");
-//		challenge("data_scenarios_a_example.in");
-//		challenge("data_scenarios_e_sanfrancisco.in");
-//		challenge("data_scenarios_f_tokyo.in");
+		challenge("data_scenarios_c_metropolis.in");
+		challenge("data_scenarios_d_polynesia.in");
+		challenge("data_scenarios_a_example.in");
+		challenge("data_scenarios_e_sanfrancisco.in");
+		challenge("data_scenarios_f_tokyo.in");
 	}
 	
 	public static void challenge(String dataset) {
@@ -80,7 +80,7 @@ public class Main {
 		}
 				
 		// Solver
-		ISolver solver = new SolverPelle(); //FIXME metti qui il tuo solver
+		ISolver solver = new SolverPelle();
 		SolverOutput solverOutput = solver.solver(solverInput);
 		
 		// Validator
@@ -91,7 +91,7 @@ public class Main {
 		sb.append(solverOutput.getAntennaPositions().size());
 		sb.append("\n");
 		for(AntennaPosition s : solverOutput.getAntennaPositions()) {
-			sb.append(s.getId());
+			sb.append(s.getAntenna().getId());
 			sb.append(" ");
 			sb.append(s.getX());
 			sb.append(" ");
@@ -113,7 +113,7 @@ public class Main {
 		}
 		Set<Integer> ids = new HashSet<>();
 		for(AntennaPosition a : solverOutput.getAntennaPositions()) {
-			ids.add(a.getId());
+			ids.add(a.getAntenna().getId());
 		}
 		if(ids.size() < solverOutput.getAntennaPositions().size()) {
 			throw new ValidationException("Posizionata più volte la stessa antenna");

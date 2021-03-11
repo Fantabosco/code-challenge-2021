@@ -86,6 +86,9 @@ public class Main {
 		// Validator
 		validate(solverInput, solverOutput);
 		
+		// Scoring
+		scoring(solverInput, solverOutput);
+		
 		// Serializer
 		StringBuilder sb = new StringBuilder();
 		sb.append(solverOutput.getAntennaPositions().size());
@@ -102,6 +105,20 @@ public class Main {
 		// Writer
 		log.info("Writing solution for \"{}\", with score: {}", dataset, solverOutput.getScore());
 		FileUtils.writeFile(dataset, sb.toString(), solverOutput.getScore());
+	}
+
+	private static void scoring(SolverInput solverInput, SolverOutput solverOutput) {
+		int score = (new ISolver() {
+			public int scoreOutput() {
+				return this.getTotalScore(solverInput, solverOutput);
+			}
+			
+			@Override
+			public SolverOutput solver(SolverInput solverInput) {
+				return null;
+			}
+		}).scoreOutput();
+		solverOutput.setScore(score);
 	}
 
 	private static void validate(SolverInput solverInput, SolverOutput solverOutput) {

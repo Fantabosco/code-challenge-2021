@@ -14,17 +14,16 @@ public interface ISolver {
 	
 	default int getBuildingScore(Building b, AntennaPosition a) {
 		/*
-		s(a, b) = BC[b] × AC[a] − BL[b] × dist(b, a)
-		
-		s(a, b) = building score 
-		dist(b, a) = manhattan distance between the two coordinate
-		
-
-
-		
+			s(a, b) = BC[b] × AC[a] − BL[b] × dist(b, a)
+			dove: 
+				s(a, b) = building score
+				BC[b] = connection speed b
+				AC[a] = connection speed a
+				BL[b] = latency weight b
+				dist(b, a) = manhattan distance between the two coordinate
 		*/
-		
-		return 0;
+		return b.getConnectionSpeedWeight() * a.getAntenna().getConnectionSpeed()
+				- b.getLatencyWeight() * getManhattanDistance(a, b);
 	}
 	
 	default int getBuildingScore(Building b, List<AntennaPosition> antennas) {
@@ -51,7 +50,7 @@ public interface ISolver {
 	}
 	
 	default int getManhattanDistance(AntennaPosition a, Building b) {
-		return 0;
+		return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
 	}
 
 	default boolean isRewardAssigned(List<Building> bs, List<AntennaPosition> aps) {

@@ -12,12 +12,9 @@ import it.reply.fantabosco.model.SolverInput;
 import it.reply.fantabosco.model.SolverOutput;
 import it.reply.fantabosco.solver.ISolver;
 import it.reply.fantabosco.solver.SolverGiova;
-import it.reply.fantabosco.solver.SolverPelle;
 import it.reply.fantabosco.utils.FileUtils;
 import it.reply.fantabosco.utils.ValidationException;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 public class Main {
 
 	public static void main(String[] args) {
@@ -25,7 +22,6 @@ public class Main {
 		challenge("data_scenarios_b_mumbai.in");
 		challenge("data_scenarios_c_metropolis.in");
 		challenge("data_scenarios_d_polynesia.in");
-		challenge("data_scenarios_a_example.in");
 		challenge("data_scenarios_e_sanfrancisco.in");
 		challenge("data_scenarios_f_tokyo.in");
 	}
@@ -80,7 +76,7 @@ public class Main {
 		}
 				
 		// Solver
-		ISolver solver = new SolverPelle();
+		ISolver solver = new SolverGiova();
 		SolverOutput solverOutput = solver.solver(solverInput);
 		
 		// Validator
@@ -103,7 +99,6 @@ public class Main {
 		}
 
 		// Writer
-		log.info("Writing solution for \"{}\", with score: {}", dataset, solverOutput.getScore());
 		FileUtils.writeFile(dataset, sb.toString(), solverOutput.getScore());
 	}
 

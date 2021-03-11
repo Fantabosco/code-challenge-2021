@@ -1,15 +1,19 @@
 package it.reply.fantabosco;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import it.reply.fantabosco.model.Antenna;
+import it.reply.fantabosco.model.AntennaPosition;
 import it.reply.fantabosco.model.Building;
 import it.reply.fantabosco.model.SolverInput;
 import it.reply.fantabosco.model.SolverOutput;
 import it.reply.fantabosco.solver.ISolver;
 import it.reply.fantabosco.solver.SolverGiova;
 import it.reply.fantabosco.utils.FileUtils;
+import it.reply.fantabosco.utils.ValidationException;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -79,6 +83,7 @@ public class Main {
 		SolverOutput solverOutput = solver.solver(solverInput);
 		
 		// Validator
+		validate(solverInput, solverOutput);
 		
 		// Serializer
 		StringBuilder sb = new StringBuilder();
@@ -92,5 +97,37 @@ public class Main {
 		// Writer
 		log.info("Writing solution for \"{}\", with score: {}", dataset, solverOutput.getScore());
 		FileUtils.writeFile(dataset, sb.toString(), solverOutput.getScore());
+	}
+
+	private static void validate(SolverInput solverInput, SolverOutput solverOutput) {
+		if(solverOutput.getAntennaPositions() == null || solverOutput.getAntennaPositions().isEmpty()) {
+			throw new ValidationException("Nessuna antenna posizionata");
+		}
+		if(solverOutput.getAntennaPositions().size() > solverInput.getAntennas().size()) {
+			throw new ValidationException("Posizionate più antenne di quelle esistenti");
+		}
+		Set<Integer> ids = new HashSet<>();
+		for(AntennaPosition a : solverOutput.getAntennaPositions()) {
+			ids.add(a.getId());
+		}
+		if(ids.size() < solverOutput.getAntennaPositions().size()) {
+			throw new ValidationException("Posizionata più volte la stessa antenna");
+		}
+		
+		for(int i = 0; i<solverOutput.getAntennaPositions().size(); i++) {
+			AntennaPosition a1 = solverOutput.getAntennaPositions().get(i);
+			for(int j = i+1; i<solverOutput.getAntennaPositions().size(); i++) {
+				AntennaPosition a2 = solverOutput.getAntennaPositions().get(j);
+				if(a1.getX() == a2.getX() && a1.getY() == a2.getY()) {
+					throw new ValidationException("Posizionate più antenne nella stessa cella");
+				}
+			}
+			if(a1.getX() < 0 || a1.getX() > solverInput.getW()) {
+				throw new ValidationException("Antenna posizionata in X non valida: " + a1);
+			}
+			if(a1.getY() < 0 || a1.getY() > solverInput.getH()) {
+				throw new ValidationException("Antenna posizionata in Y non valida: " + a1);
+			}
+		}
 	}
 }

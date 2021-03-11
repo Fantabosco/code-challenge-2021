@@ -87,12 +87,16 @@ public class Main {
 		
 		// Serializer
 		StringBuilder sb = new StringBuilder();
-//		if(solverOutput.getData() != null) {
-//			for(String s : solverOutput.getData()) {
-//				sb.append(s);
-//				sb.append("\n");
-//			}
-//		}
+		sb.append(solverOutput.getAntennaPositions().size());
+		sb.append("\n");
+		for(AntennaPosition s : solverOutput.getAntennaPositions()) {
+			sb.append(s.getId());
+			sb.append(" ");
+			sb.append(s.getX());
+			sb.append(" ");
+			sb.append(s.getY());
+			sb.append("\n");
+		}
 
 		// Writer
 		log.info("Writing solution for \"{}\", with score: {}", dataset, solverOutput.getScore());

@@ -16,7 +16,7 @@ public class FileUtils {
 	
 	private static final String OUTPUT_PATH = "src/main/resources/out/";
 	private static final String OUTPUT_FILE_EXTENSION = ".out.txt";
-	private static final String INPUT_FILE_EXTENSION = ".txt";
+	private static final String INPUT_FILE_EXTENSION = ".in";
 
 	private FileUtils() {
 	}
@@ -35,6 +35,8 @@ public class FileUtils {
 			while ((sCurrentLine = br.readLine()) != null) {
 				output.add(sCurrentLine);
 			}
+
+			br.close();
 		} catch (NullPointerException e) {
 			log.error("File not found in classpath: {}", fileName);
 			e.printStackTrace();
@@ -53,6 +55,7 @@ public class FileUtils {
 			bufferedWriter = new BufferedWriter(fileWriter);
 			bufferedWriter.append(solution);
 			log.info("Soluzion wrote to: {}", outputFile);
+			bufferedWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

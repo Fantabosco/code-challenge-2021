@@ -13,8 +13,13 @@ import lombok.extern.log4j.Log4j2;
 public class Main {
 
 	public static void main(String[] args) {
-		//TODO inserire qui tutti i file di input da risolvere
-		challenge("a.txt");
+		challenge("data_scenarios_a_example.in");
+		challenge("data_scenarios_b_mumbai.in");
+		challenge("data_scenarios_c_metropolis.in");
+		challenge("data_scenarios_d_polynesia.in");
+		challenge("data_scenarios_a_example.in");
+		challenge("data_scenarios_e_sanfrancisco.in");
+		challenge("data_scenarios_f_tokyo.in");
 	}
 	
 	public static void challenge(String dataset) {

@@ -1,5 +1,6 @@
 package it.reply.fantabosco.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -14,6 +15,6 @@ public class SolverOutput {
 	int reward;
 	
 	// Dati della soluzione
-	List<AntennaPosition> antennaPositions;
+	List<AntennaPosition> antennaPositions = new ArrayList<>();
 
 }

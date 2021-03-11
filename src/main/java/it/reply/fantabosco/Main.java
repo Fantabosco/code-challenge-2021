@@ -12,6 +12,7 @@ import it.reply.fantabosco.model.SolverInput;
 import it.reply.fantabosco.model.SolverOutput;
 import it.reply.fantabosco.solver.ISolver;
 import it.reply.fantabosco.solver.SolverGiova;
+import it.reply.fantabosco.solver.SolverPelle;
 import it.reply.fantabosco.utils.FileUtils;
 import it.reply.fantabosco.utils.ValidationException;
 import lombok.extern.log4j.Log4j2;
@@ -79,7 +80,7 @@ public class Main {
 		}
 				
 		// Solver
-		ISolver solver = new SolverGiova(); //FIXME metti qui il tuo solver
+		ISolver solver = new SolverPelle(); //FIXME metti qui il tuo solver
 		SolverOutput solverOutput = solver.solver(solverInput);
 		
 		// Validator
